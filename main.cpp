@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include "resource.h"
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -33,6 +34,7 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
     wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
     wndClass.hIconSm = LoadIcon(NULL, IDI_WINLOGO);
     wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wndClass.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
     wndClass.cbClsExtra = 0;
     wndClass.cbWndExtra = 0;
     wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
@@ -55,6 +57,7 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
         NULL //パラメータ
     );
 
+    /*
     CreateWindowEx(
         WS_EX_CLIENTEDGE,      // 枠あり
         "EDIT",                // クラス名
@@ -67,6 +70,7 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
         GetModuleHandle(NULL),
         NULL
     );
+    */
 
     if (hwnd == NULL) {
         return -1;
