@@ -55,6 +55,19 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
         NULL //パラメータ
     );
 
+    CreateWindowEx(
+        WS_EX_CLIENTEDGE,      // 枠あり
+        "EDIT",                // クラス名
+        "",                    // 初期テキスト
+		WS_CHILD | WS_VISIBLE | ES_LEFT | ES_AUTOVSCROLL | ES_MULTILINE | WS_VSCROLL, // 子ウインドウ & 最初に表示される ＆ 左に寄せる & テキストがウインドウの幅を超えたら自動で改行する & 複数行入力可能 & 縦スクロールバーを表示
+		0, 0,                // 位置X, 位置Y
+        WINDOW_WIDTH, WINDOW_HEIGHT,               // 幅、高さ
+        hwnd,                  // 親ウィンドウ
+        (HMENU)1,              // コントロールID
+        GetModuleHandle(NULL),
+        NULL
+    );
+
     if (hwnd == NULL) {
         return -1;
     }
