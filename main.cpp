@@ -57,7 +57,6 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
         NULL //パラメータ
     );
 
-    /*
     CreateWindowEx(
         WS_EX_CLIENTEDGE,      // 枠あり
         "EDIT",                // クラス名
@@ -70,7 +69,6 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
         GetModuleHandle(NULL),
         NULL
     );
-    */
 
     if (hwnd == NULL) {
         return -1;
