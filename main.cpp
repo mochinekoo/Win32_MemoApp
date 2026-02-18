@@ -4,6 +4,10 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 
+namespace {
+    HINSTANCE hIns;
+}
+
 int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
@@ -13,11 +17,41 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     return 0;
 }
 
+LRESULT CALLBACK DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    switch (msg) {
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case IDOK:
+        case IDCANCEL:
+            EndDialog(hWnd, 0);
+            break;
+        default:
+            break;
+        }
+    default:
+        break;
+    }
+    return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
     case WM_DESTROY: {
         PostQuitMessage(0); //メッセージループ終了（=アプリを終了）
         break;
+    }
+    case WM_COMMAND: {
+        switch (LOWORD(wParam)) {
+        case MENUID_ABOUT: {
+            DialogBox(hIns,
+                MAKEINTRESOURCE(IDD_DIALOG1),
+                hWnd,
+                DialogProc);
+            break;
+        }
+        }
+		break;
     }
     }
     return DefWindowProc(hWnd, msg, wParam, lParam);
@@ -39,6 +73,7 @@ int initWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
     wndClass.cbWndExtra = 0;
     wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
     RegisterClassEx(&wndClass);
+    hIns = hInstance;
 
     //ウインドウを作成する
     HWND hwnd;
