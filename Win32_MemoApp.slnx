@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Win32_MemoApp.vcxproj" Id="ff8cdcde-725f-4d37-a85d-788497e45b45" />
+</Solution>
